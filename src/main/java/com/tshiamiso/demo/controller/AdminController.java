@@ -13,7 +13,7 @@ public class AdminController {
 
     @GetMapping
     public ResponseEntity<String> sayHello(){
-        return ResponseEntity.ok("Hi Admin");
+        return ResponseEntity.ok("Hi Adminssss");
     }
 
 }
