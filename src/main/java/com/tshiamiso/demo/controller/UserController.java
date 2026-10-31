@@ -38,11 +38,4 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    // All admins permissions
-    /** POST /api/v1/user → create an account directly, e.g. add a colleague as ADMIN. Returns 201. */
-    @PostMapping("/createUser")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserRequest request) throws Throwable {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(request));
-    }
 }

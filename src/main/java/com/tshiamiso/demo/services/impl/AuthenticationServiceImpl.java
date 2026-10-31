@@ -9,8 +9,6 @@ import com.tshiamiso.demo.entities.User;
 import com.tshiamiso.demo.repository.UserRepository;
 import com.tshiamiso.demo.services.AuthenticationService;
 import com.tshiamiso.demo.services.JWTService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,7 +42,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setLastName(signUpRequest.getLastName());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-        user.setRole(Role.USER);
+        user.setRole(Role.APPLICANT);
 
         return userRepository.save(user);
 

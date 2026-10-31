@@ -10,5 +10,6 @@ public interface UserService {
      UserDetailsService userDetailsService();
      UserDto getUserById(Long id);
      List<UserDto> getAllUsers();
-     UserDto createUser(CreateUserRequest request) throws Throwable;
+
+
 }

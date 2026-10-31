@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +27,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -58,25 +63,10 @@ public class UserServiceImpl implements UserService {
                 .toList();
     }
 
-    // ---------------- Create ----------------
 
-    @Override
-    @Transactional
-    public UserDto createUser(CreateUserRequest request) throws Throwable {
-        String email = request.getEmail().trim().toLowerCase();
-        if (userRepository.existsByEmailIgnoreCase(email)) {
-            throw new Throwable("EMAIL_TAKEN");
-        }
 
-        User user = new User();
-        user.setFirstName(request.getFirstName().trim());
-        user.setLastName(request.getLastName().trim());
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(request.getRole());
-        return toDto(userRepository.save(user));
-    }
 
+    //---------- Helpers ----------------------
     // Copies the safe fields from the entity. The password is never included.
     private UserDto toDto(User user) {
         UserDto dto = new UserDto();
@@ -87,4 +77,5 @@ public class UserServiceImpl implements UserService {
         dto.setRole(user.getRole());
         return dto;
     }
+
 }
